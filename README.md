@@ -1,2 +1,2 @@
-# compressores
-codigo para central de ar comprimido com 2 compressores
+# air generator
+code for oxygen plant with two air generator
