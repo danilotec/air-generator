@@ -6,7 +6,7 @@
 #include <Arduino.h>
 #include <WiFi.h>   // Importa a Biblioteca ESP8266WiFi
 #include <PubSubClient.h>  // Importa a Biblioteca PubSubClient
-
+#include <WiFiClientSecure.h>
 /*============================================================================================
  *                   DEFINES DE ID MQTT E TÓPICOS PARA PUBLICAÇÃO E SUBSCRIBE
  ==============================================================================================*/
@@ -64,21 +64,23 @@
  *                                         WIFI
  ==============================================================================================*/
  
-const char* SSID = "CR-AP-GALPAO";  // SSID / nome da rede WI-FI que deseja se conectar
-const char* PASSWORD = "K615#nq1";  // Senha da rede WI-FI que deseja se conectar
+const char* SSID = "4G-MIFI-6AC"; // SSID da rede WI-FI
+const char* PASSWORD = "1234567890"; // Senha da rede WI-FI
 
 /*============================================================================================
  *                                         MQTT
  ==============================================================================================*/
  
-const char* BROKER_MQTT = "broker.hivemq.com";  //URL do broker MQTT que se deseja utilizar
-int BROKER_PORT = 1883;                         // Porta do Broker MQTT
+const char* BROKER_MQTT = "#"; // URL do broker MQTT
+int BROKER_PORT = 8883; // Porta do Broker MQTT para conexões seguras
+const char* USERNAME = "#"; // Substitua pelo seu usuário
+const char* PASSWORD_MQTT = "#"; // Substitua pela sua senha
 
 /*============================================================================================
  *                              VARIÁVEIS E OBJETOS GLOBAIS
  ==============================================================================================*/
 
-WiFiClient espClient;          // Cria o objeto espClient
+WiFiClientSecure espClient;;          // Cria o objeto espClient
 PubSubClient MQTT(espClient);  // Instancia o Cliente MQTT passando o objeto espClient
 
 float leitura;
@@ -144,3 +146,4 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length);
 void VerificaConexoesWiFIEMQTT(void);
 void InitOutput(void);
 void InitInput(void);
+void EnviaEstadoOutputMQTT(void);
